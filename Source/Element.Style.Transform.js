@@ -31,7 +31,7 @@ if (!transformProperty && testElement.style.filter != null) transformProperty = 
 var transforms = {},
 	filterTransforms = {};
 
-var defines = Element.Transforms = {	
+var defines = Element.Transform = {	
 	// define custom transforms
 	defineTransform: function(name, fn){
 		if (Type.isFunction(fn)) transforms[name] = fn;
@@ -65,11 +65,24 @@ var parseFilter = function(properties){
 	return styles.join(' ');
 };
 
+var parseStyle = function(){
+	var properties = this.retrieve(transformStoreKey, {});
+	if (transformProperty != msFilter){
+		var text = this.style[transformProperty];
+		text.split(')').each(function(part){ // nice regex for matching "rotate(40deg) translate(200px)" 40deg and 200px would be cool
+			if (!part) return;
+			var parts = part.split('(');
+			properties[parts[0].trim()] = parts[1];
+		});
+	}
+	return properties;
+};
+
 // Implement the element methods
 var elementMethods = {
 
 	setTransform: function(property, value){
-		var properties = this.retrieve(transformStoreKey, {});
+		var properties = parseStyle.call(this);
 		properties[property] = value;
 
 		this.style[transformProperty] = (transformProperty == msFilter) ? parseFilter.call(this, properties) : parseTransforms.call(this, properties);
@@ -78,8 +91,8 @@ var elementMethods = {
 	},
 
 	getTransform: function(property){
-		var properties = this.retrieve(transformStoreKey, {});
-		return properties[transformProperty] || Element.Transforms.defaults[property];
+		var properties = parseStyle.call(this);
+		return properties[property] || Element.Transform.defaults[property];
 	}
 
 };
@@ -91,15 +104,29 @@ Element.implement(Object.append(elementMethods, {
 
 
 // Implement special transform handling
-Element.Transforms.defineTransforms({
-	rotate: function(value){
-		return 'rotate(' + parseFloat(value) + 'deg)';
-	}
+
+var parseUnit = function(property, defaultUnit){
+	return function(value){
+		if (parseFloat(value) == value) value += defaultUnit;
+		return property + '(' + value + ')';
+	};
+};
+
+Element.Transform.defineTransforms({
+	rotate: parseUnit('rotate', 'deg'),
+	skew: parseUnit('skew', 'deg'),
+	skewX: parseUnit('skewX', 'deg'),
+	skewY: parseUnit('skewY', 'deg'),
+	translate: parseUnit('translate', 'px'),
+	translateX: parseUnit('translateX', 'px'),
+	translateY: parseUnit('translateY', 'px')
 });
 
-Element.Transforms.defaults = {
+Element.Transform.defaults = {
 	rotate: 0,
-	scale: 1
+	skew: 0, skewX: 0, skewY: 0,
+	scale: 1, scaleX: 1, scaleY: 1,
+	translate: 0, translateX: 0, translateY: 0
 };
 
 

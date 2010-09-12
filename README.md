@@ -47,12 +47,12 @@ Get the value of a transform.
 - The value which is set by the setTransform method, a default value from `Element.Transform.defaults` or `null`
 
 
-Function Element.Transforms.defineTransform
+Function Element.Transform.defineTransform
 -------------------------------------------
 
 Define a custom function for special transforms
 
-	Element.Transforms.defineTransform(property, fn);
+	Element.Transform.defineTransform(property, fn);
 
 ### Arguments
 
@@ -63,13 +63,13 @@ Define a custom function for special transforms
 
 	fn (value)
 
-Function Element.Transforms.defineFilter
+Function Element.Transform.defineFilter
 ----------------------------------------
 
 Define a custom function for IE filter transforms. Because it is only possible to mimic CSS3 Transforms in IE, there 
 should be a custom function that mimics the transform behaviour in IE.
 
-	Element.Transforms.defineFilter(property, fn);
+	Element.Transform.defineFilter(property, fn);
 
 ### Arguments
 
@@ -92,7 +92,14 @@ Fx
 
 Since setStyle and getStyle methods are supported, it is possible to use Fx.Tween and Fx.Morph with transforms.
 
+### Examples
+
 	new Fx.Tween('element').start('transform-rotate', 20, 40); // rotates the element from 20 to 40 degrees
+
+	new Fx.Morph('rotate').start({
+	    'transform-rotate': [0, 80],
+	    'transform-scale': [1, 2]
+	});
 
 
 

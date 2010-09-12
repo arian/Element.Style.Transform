@@ -8,7 +8,7 @@ provides: Element.Style.Transform.Filter
 */
 
 
-Element.Transforms.defineFilters({
+Element.Transform.defineFilters({
 
 	rotate: function(value){
 		value = parseFloat(value) % 90;
