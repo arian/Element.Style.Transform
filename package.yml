@@ -11,4 +11,3 @@ authors: "[Arian Stolwijk](http://www.aryweb.nl)"
 sources:
   - "Source/Element.Style.Transform.js"
   - "Source/Element.Style.Transform.Filter.js"
-  - "Source/Fx.Transform.js"

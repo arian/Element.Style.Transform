@@ -7,9 +7,9 @@ provides: Element.Style.Transform
 ...
 */
 
-(function(global, doc, undef){
+(function(){
 
-var testElement = doc.createElement('div'),
+var testElement = document.createElement('div'),
 	transformProperty = null,
 	msFilter = 'filter',
 	transformStoreKey = 'Element.Styles.Transforms:properties';
@@ -19,12 +19,12 @@ var testElement = doc.createElement('div'),
 var properties = ['transformProperty', 'WebkitTransform', 'MozTransform', 'OTransform', 'msTransform'];
 
 for (var i = 0, l = properties.length; i < l; i++){
-	if (testElement.style[properties[i]] !== undef) transformProperty = properties[i];
+	if (testElement.style[properties[i]] != null) transformProperty = properties[i];
 }
 
 
 // test for IE filter
-if (!transformProperty && testElement.style.filter !== undef) transformProperty = msFilter;
+if (!transformProperty && testElement.style.filter != null) transformProperty = msFilter;
 
 
 // Define custom functions for special properties or MS Filters
@@ -60,7 +60,7 @@ var parseTransforms = function(properties){
 var parseFilter = function(properties){
 	var styles = [];
 	for (var name in properties){
-		if (name in filter_transforms) styles.push(filter_transforms[name].call(this, properties[name]));
+		if (name in filterTransforms) styles.push(filterTransforms[name].call(this, properties[name]));
 	}
 	return styles.join(' ');
 };
@@ -100,6 +100,21 @@ Element.Transforms.defineTransforms({
 Element.Transforms.defaults = {
 	rotate: 0,
 	scale: 1
-}
+};
 
-})(this, document);
+
+// Overwrite setStyle/getStyle for Fx.Tween and Fx.Morph
+var setStyle = Element.prototype.setStyle;
+Element.prototype.setStyle = function(property, value){
+	if (property.substr(0, 10) == 'transform-') return this.setTransform(property.substr(10), value);
+	return setStyle.call(this, property, value);
+};
+
+var getStyle = Element.prototype.getStyle;
+Element.prototype.getStyle = function(property){
+	if (property.substr(0, 10) == 'transform-') return this.getTransform(property.substr(10));
+	return getStyle.call(this, property);
+};
+
+
+})();

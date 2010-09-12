@@ -1,6 +1,8 @@
 Element.Style.Transform
 =======================
 
+**STATE: very alpha, API is likely to change and is not well tested yet.**
+
 Brings a simple cross browser API for CSS3 transforms. It will use the CSS transform property if it exists, or the MS filter property.
 
 Usage
@@ -77,5 +79,20 @@ should be a custom function that mimics the transform behaviour in IE.
 ### Signature
 
 	fn (value)
+
+
+
+Element methods: setStyle and getStyle
+--------------------------------------
+
+It is possible to use setStyle and getStyle as well if you prepend `transform-` to the property, e.g. `transform-scale`.
+
+Fx
+--
+
+Since setStyle and getStyle methods are supported, it is possible to use Fx.Tween and Fx.Morph with transforms.
+
+	new Fx.Tween('element').start('transform-rotate', 20, 40); // rotates the element from 20 to 40 degrees
+
 
 
