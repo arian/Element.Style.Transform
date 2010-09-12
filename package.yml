@@ -1,0 +1,14 @@
+name: "Element.Style.Transform"
+
+description: "Simple Cross Browser CSS3 Transforms API"
+
+license: "[MIT License](http://mootools.net/license.txt)"
+
+copyright: "&copy; [Arian Stolwijk](http://www.aryweb.nl)"
+
+authors: "[Arian Stolwijk](http://www.aryweb.nl)"
+
+sources:
+  - "Source/Element.Style.Transform.js"
+  - "Source/Element.Style.Transform.Filter.js"
+  - "Source/Fx.Transform.js"
