@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script src="../../../mootools-core/Source/Core/Core.js"></script>
+<script src="../../../mootools-core/Source/Slick/Slick.Parser.js"></script>
+<script src="../../../mootools-core/Source/Types/Array.js"></script>
+<script src="../../../mootools-core/Source/Types/Function.js"></script>
+<script src="../../../mootools-core/Source/Types/Number.js"></script>
+<script src="../../../mootools-core/Source/Types/String.js"></script>
+<script src="../../../mootools-core/Source/Types/Object.js"></script>
+<script src="../../../mootools-core/Source/Class/Class.js"></script>
+<script src="../../../mootools-core/Source/Class/Class.Extras.js"></script>
+<script src="../../../mootools-core/Source/Types/Event.js"></script>
+<script src="../../../mootools-core/Source/Browser/Browser.js"></script>
+<script src="../../../mootools-core/Source/Slick/Slick.Parser.js"></script>
+<script src="../../../mootools-core/Source/Slick/Slick.Finder.js"></script>
+<script src="../../../mootools-core/Source/Element/Element.js"></script>
+<script src="../../../mootools-core/Source/Element/Element.Event.js"></script>
+<script src="../../../mootools-core/Source/Element/Element.Style.js"></script>
+<script src="../../../mootools-core/Source/Element/Element.Dimensions.js"></script>
+<script src="../../../mootools-core/Source/Fx/Fx.js"></script>
+<script src="../../../mootools-core/Source/Fx/Fx.CSS.js"></script>
+<script src="../../../mootools-core/Source/Fx/Fx.Tween.js"></script>
+<script src="../../../mootools-core/Source/Fx/Fx.Morph.js"></script>
+<script src="../../../mootools-core/Source/Fx/Fx.Transitions.js"></script>
+<script src="../../Source/Element.Style.Transform.js"></script>
+<script src="../../Source/Element.Style.Transform.Filter.js"></script>
+<script src="../../Source/Fx.Transform.js"></script>
+
+<style>
+
+.box {
+	background: red;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	right: 100px;
+}
+
+.test {
+	margin: 30px;
+	min-height: 200px;
+}
+
+.output {
+	position: relative;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="test">
+	Should rotate the box with 40 degrees
+	<div class="output">
+		<div class="box" id="rotate"></div>
+		<script>
+			$('rotate').setTransform('rotate', 40);
+		</script>
+	</div>
+</div>
+
+<div class="test">
+	Should rotate the box with -30 degrees
+	<div class="output">
+		<div class="box" id="rotate2"></div>
+		<script>
+			$('rotate2').setTransform('rotate', '-30deg');
+		</script>
+	</div>
+</div>
+
+<div class="test">
+	Should scale the box to 2 times the size
+	<div class="output">
+		<div class="box" id="scale"></div>
+		<script>
+			$('scale').setTransform('scale', 2);
+		</script>
+	</div>
+</div>
+
+
+</body>
+
+</html>

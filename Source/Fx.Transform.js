@@ -2,7 +2,7 @@
 ---
 name: Fx.Transform
 description: Tween CSS Transforms
-requires: [Element.Style.Transform, Element.Style.Transform.Filter]
+requires: [Core/Fx.Tween, Element.Style.Transform, Element.Style.Transform.Filter]
 provides: Fx.Transform
 ...
 */

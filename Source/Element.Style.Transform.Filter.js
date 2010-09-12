@@ -11,6 +11,9 @@ provides: Element.Style.Transform.Filter
 Element.Transforms.defineFilters({
 
 	rotate: function(value){
+		value = parseFloat(value) % 90;
+		if (value < 0) value += 90;
+
 		var rad = value * Math.PI / 180,
 			costheta = Math.cos(rad),
 			sintheta = Math.sin(rad),
